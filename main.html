@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificações AngloGold</title>
-    <script src="" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLsoMeFlhPuMaLDA-Q4gvuz1R8fxNs71U&libraries=places&callback=initMap" async defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Tela Inicial -->
     <div id="intro-screen">
         <div id="logos">
-            <img src="rouxinol_anglo.png" alt="rouxinol_anglo" class="logo">
+            <img src="anglologo.png" alt="anglo" class="logo">
         </div>
         <div id="buttons">
-            <button onclick="startMap()">MINA CUIABÁ</button>
-            <button onclick="otherFunction()">MINA LAMEGO</button>
-            <button onclick="otherFunction()">MINA QUEIRÓZ</button>
+            <button onclick="startMap('mina_cuiaba')">MINA CUIABÁ</button>
+            <button onclick="startMap('mina_lamego')">MINA LAMEGO</button>
+            <button onclick="startMap('mina_queiroz')">MINA QUEIRÓZ</button>
         </div>
     </div>
 

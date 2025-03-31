@@ -1,11 +1,13 @@
 let map, marker, autocomplete;
 
 function initMap() {
+    // Inicializa o mapa com uma posição padrão (Belo Horizonte)
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -19.8157, lng: -43.9542 }, // Belo Horizonte como padrão
-        zoom: 12
+        zoom: 12,
     });
 
+    // Inicializa o marcador no mapa
     marker = new google.maps.Marker({
         map: map,
     });
@@ -33,14 +35,16 @@ function onPlaceChanged() {
         map.setZoom(17); // Aumenta o zoom
     }
 
-    marker.setPosition(place.geometry.location); // Coloca o marcador no local encontrado
+    // Coloca o marcador no local encontrado
+    marker.setPosition(place.geometry.location);
 }
 
 function searchLocation() {
     let address = document.getElementById("search").value;
     let geocoder = new google.maps.Geocoder();
-    
-    geocoder.geocode({ address: address }, function(results, status) {
+
+    // Geocodifica o endereço inserido pelo usuário
+    geocoder.geocode({ address: address }, function (results, status) {
         if (status === "OK") {
             map.setCenter(results[0].geometry.location);
             marker.setPosition(results[0].geometry.location);

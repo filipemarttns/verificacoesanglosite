@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificações AngloGold</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLsoMeFlhPuMaLDA-Q4gvuz1R8fxNs71U&libraries=places&callback=initMap" async defer></script>
+    <script src="" async defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="header">
-        <input id="search" type="text" placeholder="Digite um endereço...">
-        <button onclick="searchLocation()">Buscar</button>
+    <!-- Tela Inicial -->
+    <div id="intro-screen">
+        <div id="logos">
+            <img src="rouxinol_anglo.png" alt="rouxinol_anglo" class="logo">
+        </div>
+        <div id="buttons">
+            <button onclick="startMap()">MINA CUIABÁ</button>
+            <button onclick="otherFunction()">MINA LAMEGO</button>
+            <button onclick="otherFunction()">MINA QUEIRÓZ</button>
+        </div>
     </div>
-    <div id="map"></div>
+
+    <!-- Mapa (inicialmente oculto) -->
+    <div id="map-screen" style="display: none;">
+        <div id="header">
+            <input id="search" type="text" placeholder="Digite um endereço...">
+            <button onclick="searchLocation()">Buscar</button>
+        </div>
+        <div id="map"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -55,4 +55,21 @@ function searchLocation() {
     });
 }
 
-window.onload = initMap;
+function startMap() {
+    // Oculta a tela inicial e exibe a tela do mapa
+    document.getElementById("intro-screen").style.display = "none";
+    document.getElementById("map-screen").style.display = "block";
+
+    // Inicializa o mapa após a transição
+    initMap();
+}
+
+function otherFunction() {
+    alert("Função ainda não implementada.");
+}
+
+window.onload = () => {
+    // Quando a página carregar, mostra a tela inicial
+    document.getElementById("intro-screen").style.display = "flex";
+    document.getElementById("map-screen").style.display = "none";
+};

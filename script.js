@@ -78,7 +78,30 @@ function loadKMZ(kmzUrl) {
         });
         infoWindow.open(map);
     });
+
+    // Adicionar hover nas linhas
+    google.maps.event.addListener(kmzLayer, 'mouseover', function (event) {
+        // Aumentar a opacidade ou mudar a cor das linhas
+        const lineStyle = {
+            strokeColor: '#D35400', // Cor laranja mais escura
+            strokeOpacity: 1.0, // Cor mais sólida
+            strokeWeight: 4 // Tamanho da linha maior para destaque
+        };
+        // Aqui estamos basicamente configurando o estilo para as linhas com base no evento
+        kmzLayer.setOptions({ styles: [lineStyle] });
+    });
+
+    google.maps.event.addListener(kmzLayer, 'mouseout', function (event) {
+        // Restaurar a cor original
+        const lineStyle = {
+            strokeColor: '#FFA500', // Cor original
+            strokeOpacity: 0.8, // Opacidade normal
+            strokeWeight: 2 // Peso original da linha
+        };
+        kmzLayer.setOptions({ styles: [lineStyle] });
+    });
 }
+
 
 window.onload = () => {
     document.getElementById("intro-screen").style.display = "flex";

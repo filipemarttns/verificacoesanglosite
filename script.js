@@ -1,5 +1,5 @@
 let map, marker, autocomplete;
-let userLocation = null; // Variável para armazenar a localização do usuário
+let userLocation = null;
 
 const kmzFiles = {
     mina_cuiaba: "https://drive.google.com/uc?export=download&id=1gHnX2piAX9wBXQ9K1Z5pGUPJYukuvQj2",
@@ -32,9 +32,21 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: userLocation || { lat: -19.8157, lng: -43.9542 },
         zoom: userLocation ? 17 : 12,
+        gestureHandling: "greedy",
+        styles: [
+            { featureType: "poi", stylers: [{ visibility: "off" }] },
+            { featureType: "transit", stylers: [{ visibility: "off" }] }
+        ]
     });
 
-    marker = new google.maps.Marker({ map: map });
+    marker = new google.maps.Marker({ 
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: {
+            url: "passageiro.png",
+            scaledSize: new google.maps.Size(45, 45) 
+        }
+    });
 
     if (userLocation) {
         marker.setPosition(userLocation);
@@ -49,13 +61,11 @@ function onPlaceChanged() {
     const place = autocomplete.getPlace();
     if (!place.geometry) return;
 
-    if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-    } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-    }
+    map.panTo(place.geometry.location);
+    map.setZoom(17);
     marker.setPosition(place.geometry.location);
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(() => marker.setAnimation(null), 1500);
 }
 
 function searchLocation() {
@@ -64,8 +74,10 @@ function searchLocation() {
 
     geocoder.geocode({ address: address }, function (results, status) {
         if (status === "OK") {
-            map.setCenter(results[0].geometry.location);
+            map.panTo(results[0].geometry.location);
             marker.setPosition(results[0].geometry.location);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(() => marker.setAnimation(null), 1500);
             map.setZoom(17);
         } else {
             alert("Endereço não encontrado: " + status);
@@ -74,16 +86,24 @@ function searchLocation() {
 }
 
 function startMap(mineName) {
-    document.getElementById("intro-screen").style.display = "none";
-    document.getElementById("map-screen").style.display = "block";
-    initMap();
-
-    const kmzUrl = kmzFiles[mineName];
-    if (kmzUrl) {
-        loadKMZ(kmzUrl);
-    } else {
-        alert("Arquivo KMZ não encontrado para esta mina.");
-    }
+    document.getElementById("intro-screen").style.opacity = "1";
+    document.getElementById("intro-screen").style.transition = "opacity 1s ease-out";
+    document.getElementById("intro-screen").style.opacity = "0";
+    setTimeout(() => {
+        document.getElementById("intro-screen").style.display = "none";
+        document.getElementById("map-screen").style.display = "block";
+        document.getElementById("map-screen").style.opacity = "0";
+        document.getElementById("map-screen").style.transition = "opacity 1s ease-in";
+        document.getElementById("map-screen").style.opacity = "1";
+        initMap();
+        
+        const kmzUrl = kmzFiles[mineName];
+        if (kmzUrl) {
+            loadKMZ(kmzUrl);
+        } else {
+            alert("Arquivo KMZ não encontrado para esta mina.");
+        }
+    }, 1000);
 }
 
 function loadKMZ(kmzUrl) {
@@ -97,27 +117,10 @@ function loadKMZ(kmzUrl) {
     google.maps.event.addListener(kmzLayer, 'click', function (event) {
         const name = event.featureData.name;
         const infoWindow = new google.maps.InfoWindow({
-            content: `<strong>${name}</strong>`,
+            content: `<div style="font-weight:bold; padding:10px; transition: opacity 0.5s ease-in-out;">${name}</div>`,
             position: event.latLng
         });
         infoWindow.open(map);
-    });
-
-    google.maps.event.addListener(kmzLayer, 'mouseover', function (event) {
-        const lineStyle = {
-            strokeColor: '#D35400', 
-            strokeOpacity: 1.0, 
-            strokeWeight: 4 
-        };
-        kmzLayer.setOptions({ styles: [lineStyle] });
-    });
-
-    google.maps.event.addListener(kmzLayer, 'mouseout', function (event) {
-        const lineStyle = {
-            strokeColor: '#FFA500',
-            strokeOpacity: 0.8, 
-            strokeWeight: 2 
-        };
-        kmzLayer.setOptions({ styles: [lineStyle] });
+        setTimeout(() => infoWindow.setContent(`<div style="opacity: 0.7;">${name}</div>`), 1000);
     });
 }

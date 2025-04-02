@@ -61,13 +61,12 @@ function startMap(mineName) {
     }
 }
 
-// Função para carregar o arquivo KMZ no mapa e exibir o nome do caminho ao clicar
 function loadKMZ(kmzUrl) {
     const kmzLayer = new google.maps.KmlLayer({
         url: kmzUrl,
         map: map,
         preserveViewport: true,
-        suppressInfoWindows: true, // Evita pop-ups automáticos do Google
+        suppressInfoWindows: true,
     });
 
     google.maps.event.addListener(kmzLayer, 'click', function (event) {
@@ -79,24 +78,20 @@ function loadKMZ(kmzUrl) {
         infoWindow.open(map);
     });
 
-    // Adicionar hover nas linhas
     google.maps.event.addListener(kmzLayer, 'mouseover', function (event) {
-        // Aumentar a opacidade ou mudar a cor das linhas
         const lineStyle = {
-            strokeColor: '#D35400', // Cor laranja mais escura
-            strokeOpacity: 1.0, // Cor mais sólida
-            strokeWeight: 4 // Tamanho da linha maior para destaque
+            strokeColor: '#D35400', 
+            strokeOpacity: 1.0, 
+            strokeWeight: 4 
         };
-        // Aqui estamos basicamente configurando o estilo para as linhas com base no evento
         kmzLayer.setOptions({ styles: [lineStyle] });
     });
 
     google.maps.event.addListener(kmzLayer, 'mouseout', function (event) {
-        // Restaurar a cor original
         const lineStyle = {
-            strokeColor: '#FFA500', // Cor original
-            strokeOpacity: 0.8, // Opacidade normal
-            strokeWeight: 2 // Peso original da linha
+            strokeColor: '#FFA500',
+            strokeOpacity: 0.8, 
+            strokeWeight: 2 
         };
         kmzLayer.setOptions({ styles: [lineStyle] });
     });

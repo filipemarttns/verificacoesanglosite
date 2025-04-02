@@ -13,7 +13,7 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #fe9e0e, rgb(176, 64, 0));
+    background: linear-gradient(135deg, #eadb06, rgb(234, 77, 5));
     color: white;
     animation: fadeIn 1s ease-in-out;
 }
@@ -27,12 +27,12 @@ body, html {
     width: 400px;
     height: auto;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0);
-    border-radius: 8px;
-    transition: transform 0.7s ease;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
 .logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 #buttons {
@@ -42,23 +42,23 @@ body, html {
 }
 
 button {
-    padding: 12px 25px;
+    padding: 15px 50px;
     font-size: 18px;
-    background-color: #FFA500; /* Cor laranja */
+    background-color: #000000; /* Cor laranja */
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.5s ease, transform 0.1s ease;
 }
 
 button:hover {
-    background-color: #FF4500; /* Cor laranja mais escura ao passar o mouse */
-    transform: translateY(-3px);
+    background-color: #f8f8f8; /* Cor laranja mais escura ao passar o mouse */
+    transform: translateY(-2px);
 }
 
 button:active {
-    transform: translateY(1px);
+    transform: translateY(5px);
 }
 
 /* Tela do Mapa */
@@ -74,10 +74,10 @@ button:active {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(255, 140, 0);
     padding: 12px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.67);
     z-index: 1000;
     display: flex;
     justify-content: space-between;

@@ -18,6 +18,19 @@ body, html {
     animation: fadeIn 1s ease-in-out;
 }
 
+#top-left-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#top-left-logo img {
+    width: 100px; 
+    height: auto;
+    border-radius: 3px;
+}
+
+
 #logos {    
     margin-bottom: 40px;
     animation: slideUp 3s ease-in-out;
